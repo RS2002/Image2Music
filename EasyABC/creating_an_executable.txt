@@ -1,0 +1,32 @@
+This note describes how to create a Windows PC executable of easy_abc.py
+
+EasyABC comes with setup.py to create easy_abc.exe and setupEasyABC.iss to create an installer.
+You first need to be able to run easy_abc.py using Python.
+See using_EasyABC_in_Windows.txt for that.
+
+Then you will also need to install on your computer the program Inno Setup 6 and the python package cx_Freeze:
+Inno Setup 6 can be downloaded here: https://jrsoftware.org/
+
+And cx_Freeze can be installed using:
+python -m pip install --upgrade cx_Freeze
+
+Copy all the executables, abc2abc.exe, abc2midi.exe, abcm2ps.exe,
+nwc2xml.exe, and zlibwapi.dll into the bin folder. You can find nwc2xml.exe
+and zlibwapi.dll in the older easy_abc install.
+
+Make sure the environment variables PYTHON and PYTHONPATH are set correctly.
+
+Open a command window, go to the folder easyabc_source_code... and set the
+PYTHON and PYTHONPATH using the autoexec.bat file.  You should now be
+ready to run:
+
+build.bat
+
+You should see lots of messages and an executable with other files
+should be put into the folder build/exe.win32-38/
+
+I found that executable runs fine on Windows 7 64-bit but,
+I did not get it to run on my Windows XP laptop.
+
+
+Seymour Shlien & Jan Wybren de Jong

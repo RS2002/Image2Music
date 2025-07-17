@@ -1,0 +1,170 @@
+	Running EasyABC in Linux
+
+There is no install or binary package for EasyABC on Linux. You
+will have to run it from source code and install the external
+executables called by EasyABC.
+
+EasyABC is written in Python and wxPython and requires the additional
+programs abcm2ps, abc2midi and abc2abc too in order to run.
+Please note that if you wish to run Nils Liberg's original
+version, EasyABC 1.3.5, you will need to find an old version of
+abcm2ps.
+
+EasyABC has migrated from Python 2 to Python 3. Python 2 is no longer supported.
+
+easy_abc.py expects to be started from it's installation directory
+in order to find its data files. If you start it from some other working
+directory, then you need to set the EASYABCDIR environment variable
+to point to the installation directory.
+
+EasyABC supports both FluidSynth 2 and the mediaplayer from wxPython, but most users report problems with the wxPython player.
+
+We have tested EasyABC on Linux Mint 20 using Virtual Box 6.1 and on a Raspberry Pi
+The steps we had to do are as follows:
+
+sudo apt install abcmidi abcm2ps fluid-soundfont-gm python3-wxgtk4.0 python3-pyparsing
+
+unzip Downloads/EasyABC-master.zip
+mv EasyABC-master/ EasyABC
+
+sudo apt install libfluidsynth2
+
+If that fails because the package does not exist yet then download the source code from:
+https://github.com/FluidSynth/fluidsynth/releases
+
+tar -xvzf Downloads/fluidsynth-2.2.3.tar.gz
+cd fluidsynth-2.2.3/
+mkdir build
+cd build
+sudo apt install cmake libgtk2.0-dev libpulse-dev
+cmake ..
+make libfluidsynth
+cp src/libfluidsynth.so* ~/EasyABC
+
+cd ~/EasyABC
+python3 easy_abc.py
+
+(If you get a GStreamer or wx.media error it means that FluidSynth failed to initialize. Then either FluidSynth library or SoundFont can not be found.)
+
+Then choose a soundfont in Settings -> ABC Settings -> File Settings -> soundfont
+You can find one here: /usr/share/sounds/sf2/FluidR3_GM.sf2
+
+Now exit and run EasyABC again to use FluidSynth as the mediaplayer.
+
+
+Some packages are not really needed:
+If you want to use the wxPython mediaplayer instead of FluidSynth:
+
+        sudo apt install python3-wxgtk-media4.0
+
+If you want to use MIDI recording:
+
+        sudo apt install python-wxtools python3-pygame
+
+--------------------------------------------------------
+Running EasyABC
+
+Once EasyABC is running for the first time, it will search for
+abcm2ps, abc2midi, and other executables in the /usr/bin/ and
+/usr/local/bin folders. If it does not find these executables,
+a message will pop up. If these executables are already on your
+system, you can tell EasyABC where to find them by going
+to the menu item, Settings/ABC Settings and then selecting File Settings.
+
+--------------------------------------------------------
+Using more recent version of abcm2ps or abc2midi
+
+Though abcm2ps, abc2midi, and other related programs may come
+with your current linux distribution, they are probably old
+versions and you should get more recent versions. Source code
+can be found on the web sites.
+http://moinejf.free.fr/ and http://ifdo.ca/~seymour/runabc/top.html .
+Binaries and Debian installs can be found in the abcplus web page
+http://abcplus.sourceforge.net/
+which is maintained by Guido Gonzato.
+
+If you have obtained the source code to abcm2ps and the abcmidi package
+then you will need to uncompress the zip file, cd into that directory
+and run:
+    ./configure
+    make
+    make install
+
+--------------------------------------------------------
+External MIDI player
+
+It is very convenient to run Linux on a virtual machine on the
+Windows host using Oracle's VirtualBox. This way you can avoid
+disk partitioning and finding all the drivers for your graphics
+and audio card.
+
+If you cannot get the sound to work or do not want to use score following you can
+use an external program like TiMidity.
+On Linux Mint, we installed TiMidity, timidity-interfaces-extra, and freepats.
+If your package manager does not find TiMidity, you can find it on
+http://sourceforge.net.
+
+Recent versions of TiMidity may not run correctly on your system
+and it may be necessary to reduce the period
+size from the default of 8192 down to 2048, using the runtime
+option -B 16,9. (16,10 works on Linux Mint Cinnamon edition but not on Mate.)
+If the period size is too large, data overrun may occur (you can
+verify this by running TiMidity in verbose mode) and a MIDI file
+will play too fast. Some discussion may be found on
+https://sourceforge.net/p/timidity/mailman/
+
+To get TiMidity working with EasyAbc, go to Abc Settings/File Settings
+and set the midi player to /usr/bin/timidity and the Extra Midi Player
+parameters to -B 16,9 -ig. The -ig will run timidity with a user interface,
+allowing you to stop the player.
+
+The freepats soundfont is rudimentary and rather incomplete but
+sufficient to get you started. We recommend that you install one of
+the free soundfonts that you can download from
+http://coolsoft.altervista.org/en/virtualmidisynth
+You should put the soundfont in /etc/TiMidity/ folder and modify
+the timidity.cfg file so that it points to the desired soundfont.
+
+We understand that TiMidity can be run as a virtual MIDI player using
+the -iA option. Explanations on how to set this up is given in the
+web pages:
+http://jazz-soft.net/download/Jazz-Plugin/LinuxSynth.html
+http://www.midi-howto.com/midi-howto-10.html
+http://www.csounds.com/manual/html/RealTimeLinux.html
+http://linux-audio.com/TiMidity-howto.html
+
+
+-----------------------------------------------------
+Other stand alone programs coming with EasyABC:
+
+midi2abc.py can invoked like a standalone program:
+
+python pymidi2abc.py <options>
+        [-f] <input file>
+        -o <output file>
+        -k <key signature> key name, or -6 to 6 sharps
+        -l <default note length (L: field)>
+        -m <time signature>
+        --nbb no beam breaks
+        --aux=<denominator of L: unit length>
+        --nt Do not look for triplets or broken rhythm
+        --s8 insert slurs on groups of 8th notes
+        --s16 insert slurs on groups of 16th notes
+        --bpl=<number> of bars printed per line
+        --title=<string> Adds T: field containing string
+        --origin=<string> Adds O: field containing string
+
+Here is an example:
+        python midi2abc.py -f mymidifile.mid -l 1/8 -m 4/4
+
+-----------------------------------------------------
+
+xml2abc_nils.py can also be invoked like a standalone program:
+	python xml2abc_nils.py mytune.xml
+
+Please note that Nils' xml2abc converter is now largely superceded by the, more powerful, one:
+http://wim.vree.org/svgParse/xml2abc.html
+
+Seymour Shlien fy733 [at] ncf [d0t] ca
+Jan Wybren de Jong  jw_de_jong [at] yahoo [d0t] com
+
