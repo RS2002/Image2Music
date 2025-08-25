@@ -8,7 +8,7 @@ from keye_vl_utils import process_vision_info
 # from transformers import Qwen2_5_VLForConditionalGeneration
 from tqdm import tqdm
 import json
-from pipeline import pipeline
+from pipeline3 import pipeline
 
 def get_args():
     parser = argparse.ArgumentParser(description='')
