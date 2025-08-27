@@ -8,7 +8,7 @@ from keye_vl_utils import process_vision_info
 # from transformers import Qwen2_5_VLForConditionalGeneration
 from tqdm import tqdm
 import json
-from pipeline3 import pipeline
+from pipeline import pipeline
 
 def get_args():
     parser = argparse.ArgumentParser(description='')
@@ -20,7 +20,7 @@ def get_args():
     parser.add_argument("--model_path", type=str, default="Kwai-Keye/Keye-VL-8B-Preview")
     # parser.add_argument("--model_path", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
     parser.add_argument("--clip_path", type=str, default="zer0int/LongCLIP-GmP-ViT-L-14")
-    parser.add_argument("--clip_length", type=int, default=248)
+    parser.add_argument("--clip_length", type=int, default=200) # 248
     parser.add_argument("--max_length", type=int, default=8192)
 
     parser.add_argument("--cpu", action="store_true", default=False)
