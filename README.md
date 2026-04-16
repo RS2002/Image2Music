@@ -1,6 +1,6 @@
 # Image2Music
 
-**Article:** "Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach" (under review)
+**Article:** Zijian Zhao*, Dian Jin, Zijing Zhou, "[Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach](https://arxiv.org/abs/2509.22378)", ACM ICMR 2026
 
 
 
@@ -31,7 +31,12 @@ python main.py
 ## 4. Citation
 
 ```
-
+@article{zhao2025zero,
+  title={Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach},
+  author={Zhao, Zijian and Jin, Dian and Zhou, Zijing},
+  journal={arXiv preprint arXiv:2509.22378},
+  year={2025}
+}
 ```
 
 
