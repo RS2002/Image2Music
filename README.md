@@ -1,6 +1,6 @@
 # Image2Music
 
-**Article:** Zijian Zhao*, Dian Jin, Zijing Zhou, "[Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach](https://arxiv.org/abs/2509.22378)", ACM ICMR 2026
+**Article:** Zijian Zhao*, Dian Jin, Zijing Zhou, "[Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach](https://dl.acm.org/doi/10.1145/3805622.3810723)", ACM ICMR 2026
 
 
 
@@ -31,11 +31,20 @@ python main.py
 ## 4. Citation
 
 ```
-@article{zhao2025zero,
-  title={Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach},
-  author={Zhao, Zijian and Jin, Dian and Zhou, Zijing},
-  journal={arXiv preprint arXiv:2509.22378},
-  year={2025}
+@inproceedings{zhao2026zero,
+author = {Zhao, Zijian and Jin, Dian and Zhou, Zijing},
+title = {Zero-Effort Image-to-Music Generation: An Interpretable RAG-based VLM Approach},
+year = {2026},
+isbn = {9798400726170},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3805622.3810723},
+doi = {10.1145/3805622.3810723},
+booktitle = {Proceedings of the 2026 International Conference on Multimedia Retrieval},
+pages = {2793–2797},
+numpages = {5},
+keywords = {Image-to-Music Generation (I2M), Vision Language Model (VLM), Retrieval-Augmented Generation (RAG), Music Information Retrieval (MIR), Symbolic Music, Multi-Modal, Interpretability},
+series = {ICMR '26}
 }
 ```
 
